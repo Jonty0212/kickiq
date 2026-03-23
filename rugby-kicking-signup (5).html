@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KickIQ — Early Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1e3a5f;
+    --green-light: #e8eef5;
+    --green-dark: #12243d;
+    --text: #111;
+    --muted: #666;
+    --border: #ddd;
+    --bg: #f4f6f9;
+    --white: #fff;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  header .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
+  header .dot {
+    width: 8px; height: 8px;
+    background: #7aaed6;
+    border-radius: 50%;
+  }
+
+  .hero {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 64px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border: 60px solid rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 220px; height: 220px;
+    border: 50px solid rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(122,174,214,0.2);
+    color: #7aaed6;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 5px 14px;
+    border-radius: 99px;
+    border: 1px solid rgba(122,174,214,0.3);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 72px);
+    letter-spacing: 2px;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: #7aaed6; }
+
+  .hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .form-wrap {
+    max-width: 480px;
+    margin: -36px auto 0;
+    padding: 0 20px 60px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .form-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .form-card h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .form-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 16px;
+  }
+
+  input[type="text"]:focus {
+    border-color: var(--green);
+    background: var(--white);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 4px;
+  }
+
+  .submit-btn:hover { background: var(--green-dark); }
+  .submit-btn:active { transform: scale(0.99); }
+
+  .success {
+    display: none;
+    background: var(--green-light);
+    border: 1px solid #a8dfc0;
+    color: var(--green-dark);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    margin-top: 16px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .count-strip {
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .count-strip strong {
+    color: var(--green);
+    font-size: 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    display: block;
+    font-size: 32px;
+  }
+
+  /* ADMIN */
+  .admin-toggle {
+    text-align: center;
+    padding: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .admin-toggle a {
+    color: var(--green);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #admin-panel {
+    display: none;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .admin-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  .export-btn {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+
+  .export-btn:hover { border-color: var(--green); color: var(--green); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-card .stat-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .stat-card .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; color: var(--green); }
+  .stat-card .stat-sub { font-size: 13px; color: var(--text); margin-top: 2px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: var(--muted); font-size: 13px; }
+
+  .empty { text-align: center; color: var(--muted); padding: 40px; font-size: 14px; }
+
+  footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #bbb;
+  }
+
+  @media (max-width: 480px) {
+    .form-card { padding: 24px 20px; }
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="dot"></div>
+  <div class="logo">KickIQ</div>
+</header>
+
+<div class="hero">
+  <div class="badge">Early access</div>
+  <h1>Be Part Of The<br><span>Biggest Kicking</span><br>Community</h1>
+  <p>KickIQ is the WhatsApp community for rugby kickers — tips, drills, technique breakdowns, and more. Sign up for early access below.</p>
+  <div style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.45);">by <a href="https://instagram.com/kickiqrugby" target="_blank" style="color: #4cca85; text-decoration: none;">@kickiqrugby</a></div>
+</div>
+
+<div class="form-wrap">
+  <div class="form-card">
+    <h2>Request Access</h2>
+    <p>Limited spots. Enter your details and we'll add you to the list.</p>
+    <label for="f-name">Full name</label>
+    <input type="text" id="f-name" placeholder="e.g. Jamie Thompson" />
+    <label for="f-contact">Instagram handle or phone number</label>
+    <input type="text" id="f-contact" placeholder="e.g. @jamie_kicks or 07700 900000" />
+    <label for="f-position">Position</label>
+    <select id="f-position" style="width:100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); background: var(--bg); outline: none; margin-bottom: 16px; appearance: none;">
+      <option value="" disabled selected>Select your position</option>
+      <option>Fly-half</option>
+      <option>Fullback</option>
+      <option>Wing</option>
+      <option>Centre</option>
+      <option>Scrum-half</option>
+      <option>Other</option>
+    </select>
+    <button class="submit-btn" onclick="submitForm()">Request Access</button>
+    <div class="success" id="success-msg">You're on the list! We'll be in touch soon.</div>
+  </div>
+</div>
+
+<div class="admin-toggle">
+  <a onclick="promptAdmin()">Admin view</a>
+</div>
+
+<div id="admin-panel">
+  <div class="admin-header">
+    <h3>Admin</h3>
+    <a href="https://docs.google.com/spreadsheets" target="_blank" class="export-btn" style="text-decoration:none;">Open Google Sheet</a>
+  </div>
+  <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.6;">
+    All signups are saved directly to your Google Sheet.<br>Click the button above to view them.
+  </div>
+</div>
+
+<footer>KickIQ &copy; 2026</footer>
+
+<script>
+const ADMIN_PASSWORD = 'Nultclans345/';
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3AUqekhD9YEU7QD3HWfYBn1wSjgDzvZDPZ0R-MAHD4MnaeeBLCLb6ejD-BRMICeskSw/exec';
+
+async function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const contact = document.getElementById('f-contact').value.trim();
+  const position = document.getElementById('f-position').value;
+  if (!name || !contact || !position) { alert('Please fill in all fields.'); return; }
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, contact, position, date: new Date().toLocaleDateString('en-GB') })
+    });
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-contact').value = '';
+    document.getElementById('f-position').value = '';
+    const msg = document.getElementById('success-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 4000);
+  } catch(e) {
+    alert('Something went wrong. Please try again.');
+  }
+  btn.textContent = 'Request Early Access';
+  btn.disabled = false;
+}
+
+function promptAdmin() {
+  const pw = prompt('Enter admin password:');
+  if (pw === ADMIN_PASSWORD) {
+    const panel = document.getElementById('admin-panel');
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+  } else if (pw !== null) {
+    alert('Incorrect password.');
+  }
+}
+</script>
+</body>
+</html>
