@@ -305,6 +305,128 @@
 
   .empty { text-align: center; color: var(--muted); padding: 40px; font-size: 14px; }
 
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .check-row input[type="checkbox"] {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--green);
+    cursor: pointer;
+  }
+
+  .check-row a {
+    color: var(--green);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .privacy-strip a {
+    color: var(--green);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .privacy-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .privacy-modal-overlay.open {
+    display: flex;
+  }
+
+  .privacy-modal {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .privacy-modal h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    color: var(--green-dark);
+  }
+
+  .privacy-modal .last-updated {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .privacy-modal h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green-dark);
+    margin: 18px 0 6px;
+  }
+
+  .privacy-modal p, .privacy-modal li {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .privacy-modal ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+
+  .privacy-modal-close {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding-top: 16px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .privacy-modal-close button {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
   footer {
     margin-top: auto;
     text-align: center;
@@ -351,8 +473,59 @@
       <option>Scrum-half</option>
       <option>Other</option>
     </select>
+    <div class="check-row">
+      <input type="checkbox" id="chk-age">
+      <label for="chk-age" style="font-weight:400;">I confirm I am 13 years of age or older (under 18s require parental consent)</label>
+    </div>
+    <div class="check-row">
+      <input type="checkbox" id="chk-privacy">
+      <label for="chk-privacy" style="font-weight:400;">I have read and agree to the <a onclick="openPrivacy()">Privacy Notice</a></label>
+    </div>
     <button class="submit-btn" onclick="submitForm()">Request Access</button>
     <div class="success" id="success-msg">You're on the list! We'll be in touch soon.</div>
+  </div>
+</div>
+
+<div class="privacy-strip">
+  By signing up you agree to our <a onclick="openPrivacy()">Privacy Notice</a>. We collect your name, contact details, and position to get in touch about KickIQ membership. We don't share your data with third parties. Email <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a> to request deletion.
+</div>
+
+<!-- PRIVACY MODAL -->
+<div class="privacy-modal-overlay" id="privacy-overlay" onclick="closePrivacyOutside(event)">
+  <div class="privacy-modal">
+    <h2>Privacy Notice</h2>
+    <div class="last-updated">Last updated: 26 March 2026</div>
+
+    <h3>Who we are</h3>
+    <p>KickIQ is a rugby kicking community founded by Dylan Kay. The community is managed by Jonty Culliford, who acts as data controller. Contact: <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a></p>
+
+    <h3>What data we collect</h3>
+    <p>When you sign up for early access we collect:</p>
+    <ul>
+      <li>Your full name</li>
+      <li>Your Instagram handle or phone number</li>
+      <li>Your playing position</li>
+      <li>The date of your submission</li>
+    </ul>
+
+    <h3>Why we collect it</h3>
+    <p>We collect this information solely to contact you about KickIQ membership. We will not use it for any other purpose without your consent.</p>
+
+    <h3>Who we share it with</h3>
+    <p>Your data is stored securely in a private Google Sheet accessible only to the KickIQ team. We do not sell, rent, or share your personal data with third parties.</p>
+
+    <h3>How long we keep it</h3>
+    <p>We retain your data for up to 6 months if you do not take up membership. If you become a member, we retain it for the duration of your membership and up to 12 months after it ends.</p>
+
+    <h3>Your rights</h3>
+    <p>Under UK GDPR you have the right to access, correct, or request deletion of your data at any time. To exercise these rights email <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a>. We will respond within 30 days.</p>
+
+    <h3>Complaints</h3>
+    <p>If you are unhappy with how we handle your data you can contact the Information Commissioner's Office at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a>.</p>
+
+    <div class="privacy-modal-close">
+      <button onclick="closePrivacy()">Close</button>
+    </div>
   </div>
 </div>
 
@@ -362,15 +535,62 @@
 
 <div id="admin-panel">
   <div class="admin-header">
-    <h3>Admin</h3>
+    <h3>Admin Dashboard</h3>
     <a href="https://docs.google.com/spreadsheets" target="_blank" class="export-btn" style="text-decoration:none;">Open Google Sheet</a>
   </div>
-  <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.6;">
-    All signups are saved directly to your Google Sheet.<br>Click the button above to view them.
+
+  <div class="stats-grid" style="margin-bottom:16px;">
+    <div class="stat-card">
+      <div class="stat-label">Total signups</div>
+      <div class="stat-val" id="admin-total">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Last signup</div>
+      <div class="stat-val" style="font-size:16px;padding-top:6px;" id="admin-last-name">—</div>
+      <div class="stat-label" id="admin-last-date" style="margin-top:4px;">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Fly-half</div>
+      <div class="stat-val" id="admin-pos-flyhalf">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Fullback</div>
+      <div class="stat-val" id="admin-pos-fullback">—</div>
+    </div>
+  </div>
+
+  <div class="stats-grid" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <div class="stat-label">Wing</div>
+      <div class="stat-val" id="admin-pos-wing">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Centre</div>
+      <div class="stat-val" id="admin-pos-centre">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Scrum-half</div>
+      <div class="stat-val" id="admin-pos-scrumhalf">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Other</div>
+      <div class="stat-val" id="admin-pos-other">—</div>
+    </div>
+  </div>
+
+  <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 16px;">
+    All signups with full details are in your Google Sheet.<br>
+    <a href="https://docs.google.com/spreadsheets" target="_blank" style="color:var(--green);">Open Google Sheet →</a>
+  </div>
+
+  <div style="text-align:center;">
+    <button onclick="loadAdminStats()" style="background:none;border:1px solid var(--border);padding:8px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;color:var(--muted);">↻ Refresh stats</button>
   </div>
 </div>
 
-<footer>KickIQ &copy; 2026</footer>
+<footer>
+  KickIQ &copy; 2026 &nbsp;|&nbsp; <a href="mailto:kickiqrugby@gmail.com" style="color:#bbb;">kickiqrugby@gmail.com</a> &nbsp;|&nbsp; This site does not use cookies or tracking
+</footer>
 
 <script>
 const ADMIN_PASSWORD = 'Nultclans345/';
@@ -382,6 +602,8 @@ async function submitForm() {
   const contact = document.getElementById('f-contact').value.trim();
   const position = document.getElementById('f-position').value;
   if (!name || !contact || !position) { alert('Please fill in all fields.'); return; }
+  if (!document.getElementById('chk-age').checked) { alert('Please confirm you are 13 or older.'); return; }
+  if (!document.getElementById('chk-privacy').checked) { alert('Please agree to the Privacy Notice.'); return; }
   const btn = document.querySelector('.submit-btn');
   btn.textContent = 'Submitting...';
   btn.disabled = true;
@@ -405,11 +627,43 @@ async function submitForm() {
   btn.disabled = false;
 }
 
+function openPrivacy() {
+  document.getElementById('privacy-overlay').classList.add('open');
+}
+
+function closePrivacy() {
+  document.getElementById('privacy-overlay').classList.remove('open');
+}
+
+function closePrivacyOutside(e) {
+  if (e.target === document.getElementById('privacy-overlay')) closePrivacy();
+}
+
+async function loadAdminStats() {
+  try {
+    const res = await fetch(SCRIPT_URL + '?action=stats');
+    const data = await res.json();
+    document.getElementById('admin-total').textContent = data.total ?? '—';
+    document.getElementById('admin-last-name').textContent = data.lastName ?? '—';
+    document.getElementById('admin-last-date').textContent = data.lastDate ?? '—';
+    document.getElementById('admin-pos-flyhalf').textContent   = data.positions?.['Fly-half']   ?? 0;
+    document.getElementById('admin-pos-fullback').textContent  = data.positions?.['Fullback']   ?? 0;
+    document.getElementById('admin-pos-wing').textContent      = data.positions?.['Wing']       ?? 0;
+    document.getElementById('admin-pos-centre').textContent    = data.positions?.['Centre']     ?? 0;
+    document.getElementById('admin-pos-scrumhalf').textContent = data.positions?.['Scrum-half'] ?? 0;
+    document.getElementById('admin-pos-other').textContent     = data.positions?.['Other']      ?? 0;
+  } catch(e) {
+    document.getElementById('admin-total').textContent = 'Error';
+  }
+}
+
 function promptAdmin() {
   const pw = prompt('Enter admin password:');
   if (pw === ADMIN_PASSWORD) {
     const panel = document.getElementById('admin-panel');
-    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    const isOpen = panel.style.display === 'block';
+    panel.style.display = isOpen ? 'none' : 'block';
+    if (!isOpen) loadAdminStats();
   } else if (pw !== null) {
     alert('Incorrect password.');
   }
