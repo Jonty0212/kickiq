@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KickIQ — WhatsApp Community Terms & Conditions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --navy:#12243D;
+  --navy-mid:#1E3A5F;
+  --blue:#7AAED6;
+  --bg:#f4f6f9;
+  --white:#fff;
+  --text:#1a1a1a;
+  --muted:#666;
+  --border:#ddd;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  background:var(--navy);
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;
+  letter-spacing:1px;
+  color:#fff;
+  text-decoration:none;
+}
+
+.dot{width:8px;height:8px;background:var(--blue);border-radius:50%;}
+
+.header-left{display:flex;align-items:center;gap:10px;}
+
+.back-link{
+  font-size:13px;
+  color:rgba(255,255,255,0.6);
+  text-decoration:none;
+  transition:color 0.15s;
+}
+.back-link:hover{color:#fff;}
+
+/* HERO */
+.hero{
+  background:var(--navy);
+  color:#fff;
+  padding:40px 24px 56px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;
+  border:40px solid rgba(255,255,255,0.04);border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-50px;left:-30px;
+  width:160px;height:160px;
+  border:35px solid rgba(255,255,255,0.04);border-radius:50%;
+}
+
+.badge{
+  display:inline-block;
+  background:rgba(122,174,214,0.2);color:var(--blue);
+  font-size:11px;font-weight:500;letter-spacing:0.5px;
+  padding:4px 12px;border-radius:99px;
+  border:1px solid rgba(122,174,214,0.3);
+  margin-bottom:16px;
+}
+
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px,6vw,52px);
+  letter-spacing:2px;line-height:1.1;
+  margin-bottom:10px;
+}
+
+.hero h1 span{color:var(--blue);}
+
+.hero p{
+  font-size:14px;
+  color:rgba(255,255,255,0.55);
+  margin-top:8px;
+}
+
+/* CONTENT */
+.content-wrap{
+  max-width:760px;
+  margin:-28px auto 0;
+  padding:0 20px 60px;
+  position:relative;
+  z-index:10;
+}
+
+.doc-card{
+  background:var(--white);
+  border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+  overflow:hidden;
+}
+
+/* TOC */
+.toc{
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:20px 28px;
+}
+
+.toc h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+  color:var(--navy-mid);
+  margin-bottom:12px;
+}
+
+.toc ol{
+  list-style:none;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4px 20px;
+}
+
+.toc li a{
+  font-size:13px;
+  color:var(--navy-mid);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:3px 0;
+  transition:color 0.15s;
+}
+.toc li a:hover{color:var(--blue);}
+.toc li a::before{
+  content:'';
+  width:4px;height:4px;
+  background:var(--blue);
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+/* DOC BODY */
+.doc-body{padding:32px 36px;}
+
+.doc-section{margin-bottom:32px;}
+
+.doc-section h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;
+  letter-spacing:1.5px;
+  color:var(--navy);
+  margin-bottom:12px;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--blue);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.doc-section h2 .sec-num{
+  font-size:12px;
+  background:var(--navy);
+  color:#fff;
+  padding:2px 8px;
+  border-radius:4px;
+  font-family:'DM Sans',sans-serif;
+  font-weight:500;
+}
+
+.doc-section h3{
+  font-size:14px;
+  font-weight:500;
+  color:var(--navy-mid);
+  margin:16px 0 6px;
+}
+
+.doc-section p{
+  font-size:14px;
+  line-height:1.75;
+  color:#333;
+  margin-bottom:10px;
+}
+
+.doc-section ul,.doc-section ol{
+  padding-left:20px;
+  margin-bottom:10px;
+}
+
+.doc-section li{
+  font-size:14px;
+  line-height:1.75;
+  color:#333;
+  margin-bottom:4px;
+}
+
+.highlight-box{
+  background:rgba(122,174,214,0.08);
+  border-left:3px solid var(--blue);
+  border-radius:0 8px 8px 0;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:13px;
+  color:var(--navy-mid);
+  line-height:1.6;
+}
+
+.warning-box{
+  background:#fff8e1;
+  border-left:3px solid #f59e0b;
+  border-radius:0 8px 8px 0;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:13px;
+  color:#856404;
+  line-height:1.6;
+}
+
+/* FOOTER STRIP */
+.doc-footer{
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:20px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.doc-footer p{font-size:12px;color:var(--muted);}
+.doc-footer a{color:var(--navy-mid);text-decoration:underline;font-size:12px;}
+
+.nav-links{
+  display:flex;
+  gap:16px;
+}
+
+footer{
+  margin-top:auto;
+  text-align:center;
+  padding:20px;
+  font-size:12px;
+  color:#bbb;
+}
+footer a{color:#bbb;}
+
+@media(max-width:600px){
+  .doc-body{padding:24px 20px;}
+  .toc ol{grid-template-columns:1fr;}
+  .doc-footer{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="dot"></div>
+    <a class="logo" href="/">KickIQ</a>
+  </div>
+  <a class="back-link" href="/">← Back to sign-up</a>
+</header>
+
+<div class="hero">
+  <div class="badge">Legal</div>
+  <h1>WhatsApp Community<br><span>Terms & Conditions</span></h1>
+  <p>Last updated: 26 March 2026</p>
+</div>
+
+<div class="content-wrap">
+  <div class="doc-card">
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#s1">Introduction</a></li>
+        <li><a href="#s2">Membership & Access</a></li>
+        <li><a href="#s3">Payments & Subscriptions</a></li>
+        <li><a href="#s4">Community Rules & Conduct</a></li>
+        <li><a href="#s5">Health, Safety & Disclaimer</a></li>
+        <li><a href="#s6">Changes to These Terms</a></li>
+        <li><a href="#s7">Governing Law</a></li>
+        <li><a href="#s8">Contact</a></li>
+      </ol>
+    </div>
+
+    <!-- DOCUMENT BODY -->
+    <div class="doc-body">
+
+      <div class="highlight-box">
+        These Terms & Conditions apply specifically to the <strong>KickIQ WhatsApp Community</strong> subscription product. By completing payment you confirm you have read and agree to these terms.
+      </div>
+
+      <!-- 1 -->
+      <div class="doc-section" id="s1">
+        <h2><span class="sec-num">1</span> Introduction</h2>
+        <p>Welcome to KickIQ, a subscription-based WhatsApp community for rugby kickers. By joining and paying for membership you agree to be bound by these Terms and Conditions. Please read them carefully before signing up.</p>
+        <p>KickIQ is founded and owned by <strong>Dylan Kay</strong>. The WhatsApp community is managed by <strong>Jonty Culliford</strong>. For any queries contact: <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a></p>
+      </div>
+
+      <!-- 2 -->
+      <div class="doc-section" id="s2">
+        <h2><span class="sec-num">2</span> Membership & Access</h2>
+
+        <h3>2.1 Who can join</h3>
+        <p>KickIQ is open to anyone with an interest in rugby kicking, including players, coaches, and parents of young players. Members must be aged 13 or over.</p>
+        <p>Where a member is under 18, a parent or guardian must consent to their participation before signing up. By completing the sign-up process, the member confirms that this consent has been obtained. Parents or guardians do not need to join the community themselves unless they wish to. KickIQ accepts no liability for membership taken up by under 18s without parental consent.</p>
+
+        <h3>2.2 How access works</h3>
+        <p>Upon successful payment, you will receive access to the KickIQ WhatsApp Community. Access is granted to the individual subscriber and is non-transferable. You may not share your access link or credentials with others.</p>
+
+        <h3>2.3 What is included</h3>
+        <p>Your membership gives you access to the following KickIQ community channels:</p>
+        <ul>
+          <li>Announcements</li>
+          <li>General discussion</li>
+          <li>Training &amp; Drills</li>
+          <li>Clips &amp; Kicks</li>
+          <li>Wins &amp; Results</li>
+          <li>Gameday Wins</li>
+          <li>Links &amp; Resources</li>
+        </ul>
+        <p>The content and structure of channels may change over time as the community grows.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="doc-section" id="s3">
+        <h2><span class="sec-num">3</span> Payments & Subscriptions</h2>
+
+        <h3>3.1 Subscription fees</h3>
+        <p>KickIQ operates on a monthly subscription basis. The current membership fee is displayed at the point of purchase. Founding member rates, where offered, are locked in for the lifetime of that membership provided the subscription remains active.</p>
+
+        <h3>3.2 Billing</h3>
+        <p>Payments are processed through Stripe. Your subscription renews automatically each month on the date you first joined. By subscribing you authorise recurring monthly charges.</p>
+
+        <h3>3.3 Cancellation</h3>
+        <p>You may cancel your subscription at any time. Cancellation takes effect at the end of the current billing period. You will retain access to the community until that date. No partial refunds are issued for unused time within a billing period.</p>
+
+        <h3>3.4 Refunds</h3>
+        <p>Due to the nature of digital community access, refunds are not issued once access has been granted unless:</p>
+        <ul>
+          <li>You have been charged in error</li>
+          <li>There has been a technical failure preventing access for more than 72 hours</li>
+          <li>You cancel within 14 days of your first payment and have not accessed the community</li>
+        </ul>
+        <div class="warning-box">
+          To request a refund under these circumstances, contact <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a> within 14 days of the relevant payment.
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="doc-section" id="s4">
+        <h2><span class="sec-num">4</span> Community Rules & Conduct</h2>
+        <p>By joining KickIQ you agree to the following standards of conduct. Failure to comply may result in removal from the community without refund.</p>
+
+        <h3>4.1 You must not</h3>
+        <ul>
+          <li>Post content that is abusive, threatening, discriminatory, or offensive</li>
+          <li>Spam any channel with unsolicited promotional content</li>
+          <li>Share, redistribute, or sell any content from the community without permission</li>
+          <li>Impersonate any other member, coach, or public figure</li>
+          <li>Post content that infringes copyright or third party intellectual property</li>
+          <li>Harass, bully, or intimidate any community member</li>
+          <li>Share another member's personal information without their consent</li>
+        </ul>
+
+        <h3>4.2 Content ownership</h3>
+        <p>All coaching content, drills, videos, and materials shared by KickIQ coaches remain the intellectual property of KickIQ. You may use content for your personal development but may not reproduce, distribute, or commercialise it without written permission.</p>
+
+        <h3>4.3 Removal policy</h3>
+        <p>KickIQ reserves the right to remove any member from the community at any time for breach of these rules. Where removal is due to a breach, no refund will be issued for the remaining subscription period.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="doc-section" id="s5">
+        <h2><span class="sec-num">5</span> Health, Safety & Disclaimer</h2>
+        <p>KickIQ provides coaching content for educational and development purposes only. All training advice, drills, and technique guidance is general in nature and does not constitute professional medical or physiotherapy advice.</p>
+        <p>By participating in any training activities based on KickIQ content you accept that:</p>
+        <ul>
+          <li>You are responsible for assessing your own fitness and physical condition</li>
+          <li>You should consult a qualified medical professional before undertaking new physical training if you have any health concerns</li>
+          <li>KickIQ and its coaches are not liable for any injury, loss, or damage arising from participation in activities based on community content</li>
+        </ul>
+      </div>
+
+      <!-- 6 -->
+      <div class="doc-section" id="s6">
+        <h2><span class="sec-num">6</span> Changes to These Terms</h2>
+        <p>KickIQ reserves the right to update these Terms and Conditions at any time. Where changes are material, members will be notified via the Announcements channel with at least 14 days notice. Continued membership after the notice period constitutes acceptance of the updated terms.</p>
+      </div>
+
+      <!-- 7 -->
+      <div class="doc-section" id="s7">
+        <h2><span class="sec-num">7</span> Governing Law</h2>
+        <p>These Terms and Conditions are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="doc-section" id="s8">
+        <h2><span class="sec-num">8</span> Contact</h2>
+        <p>For any questions about these Terms and Conditions or your membership, please contact:</p>
+        <div class="highlight-box">
+          <strong>KickIQ</strong><br>
+          Founder &amp; Owner: Dylan Kay<br>
+          Community Manager: Jonty Culliford<br>
+          Email: <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a><br>
+          Instagram: <a href="https://instagram.com/kickiqrugby" target="_blank">@kickiqrugby</a><br>
+          Website: <a href="https://kickiqrugby-access.com">kickiqrugby-access.com</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DOC FOOTER -->
+    <div class="doc-footer">
+      <p>These terms apply to the KickIQ WhatsApp Community product only. &copy; KickIQ 2026</p>
+      <div class="nav-links">
+        <a href="/privacy.html">Privacy Notice</a>
+        <a href="/">Back to sign-up</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  KickIQ &copy; 2026 &nbsp;|&nbsp; <a href="mailto:kickiqrugby@gmail.com">kickiqrugby@gmail.com</a> &nbsp;|&nbsp; This site does not use cookies or tracking
+</footer>
+
+</body>
+</html>
